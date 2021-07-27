@@ -20,7 +20,8 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $schedules = Schedule::all();
+        $user =auth('api')->user();
+        $schedules = Schedule::with('employee','service')->where('user_id',$user->id)->orderBy('scheduling_date')->get();
         if($schedules)
             return response()->json($schedules);
         return response()->json(['error'=>'Response not found.']);

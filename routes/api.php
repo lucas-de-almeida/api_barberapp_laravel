@@ -34,7 +34,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     
     Route::resource('companies', CompanyController::class)->except(['create', 'edit']);
     Route::resource('employees', EmployeeController::class)->except(['create', 'edit']);
-    Route::resource('schedule', ScheduleController::class)->except(['create', 'edit']);
+    Route::resource('schedules', ScheduleController::class)->except(['create', 'edit']);
     Route::resource('services', ServiceController::class)->except(['create', 'edit']);
 
    
