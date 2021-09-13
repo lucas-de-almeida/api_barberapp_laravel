@@ -15,9 +15,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string|null $name
  * @property float|null $const
- * @property int $employee_id
+ * @property int $company_id
  * 
- * @property Employee $employee
+ * @property Company $company
+ * @property Collection|Employee[] $employees
  * @property Collection|Schedule[] $schedules
  *
  * @package App\Models
@@ -29,18 +30,23 @@ class Service extends Model
 
 	protected $casts = [
 		'const' => 'float',
-		'employee_id' => 'int'
+		'company_id' => 'int'
 	];
 
 	protected $fillable = [
 		'name',
 		'const',
-		'employee_id'
+		'company_id'
 	];
 
-	public function employee()
+	public function company()
 	{
-		return $this->belongsTo(Employee::class);
+		return $this->belongsTo(Company::class);
+	}
+
+	public function employees()
+	{
+		return $this->belongsToMany(Employee::class, 'employees_services');
 	}
 
 	public function schedules()

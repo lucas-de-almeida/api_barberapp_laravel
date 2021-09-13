@@ -14,12 +14,15 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property string|null $name
+ * @property string $address
  * @property string|null $latitude
  * @property string|null $longitude
  * @property string|null $phone
  * @property string|null $social_link
+ * @property string $image
  * 
  * @property Collection|Employee[] $employees
+ * @property Collection|Service[] $services
  *
  * @package App\Models
  */
@@ -30,14 +33,21 @@ class Company extends Model
 
 	protected $fillable = [
 		'name',
+		'address',
 		'latitude',
 		'longitude',
 		'phone',
-		'social_link'
+		'social_link',
+		'image'
 	];
 
 	public function employees()
 	{
 		return $this->hasMany(Employee::class, 'companie_id');
+	}
+
+	public function services()
+	{
+		return $this->hasMany(Service::class);
 	}
 }

@@ -15,24 +15,23 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $first_name
  * @property string $last_name
+ * @property string $image
  * @property int $user_id
  * @property int $companie_id
  * 
  * @property Company $company
  * @property User $user
- * @property Collection|Schedule[] $schedules
  * @property Collection|Service[] $services
+ * @property Collection|Schedule[] $schedules
  *
  * @package App\Models
  */
 class Employee extends Model
 {
 	protected $table = 'employees';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'id' => 'int',
 		'user_id' => 'int',
 		'companie_id' => 'int'
 	];
@@ -40,6 +39,7 @@ class Employee extends Model
 	protected $fillable = [
 		'first_name',
 		'last_name',
+		'image',
 		'user_id',
 		'companie_id'
 	];
@@ -54,13 +54,13 @@ class Employee extends Model
 		return $this->belongsTo(User::class);
 	}
 
+	public function services()
+	{
+		return $this->belongsToMany(Service::class, 'employees_services');
+	}
+
 	public function schedules()
 	{
 		return $this->hasMany(Schedule::class);
-	}
-
-	public function services()
-	{
-		return $this->hasMany(Service::class);
 	}
 }

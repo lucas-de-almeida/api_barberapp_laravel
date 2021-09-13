@@ -22,7 +22,7 @@ class ServiceController extends Controller
         $services = Service::all();
         if($services)
             return response()->json($services);
-        return response()->json(['Error'=>'Response not found']);
+        return response()->json(['Error'=>'Response not found'],401);
 
       }
 
@@ -44,7 +44,7 @@ class ServiceController extends Controller
 
         if($service)
             return response()->json($service);
-        return response()->json(['Error'=>'Resource not created']);
+        return response()->json(['Error'=>'Resource not save'],401);
     }
 
     /**
